@@ -1,0 +1,23 @@
+clc
+clear all
+x=[0 0.25 0.5 0.75];
+y=[1 1.64872 2.71828 4.4816];
+n=4;
+val=0.43;
+f=zeros(n,n);
+for i=1:n
+    f(i,1)=y(i);
+end
+for j=2:n
+    for i=j:n
+        f(i,j)=(f(i,j-1)-f(i-1,j-1))/(x(i)-x(i-j+1));
+    end
+end
+f
+sum=f(1,1);
+prod=1;
+for i=2:n
+    prod=prod*(val-x(i-1));
+    sum=sum+prod*f(i,i);
+end
+sum
