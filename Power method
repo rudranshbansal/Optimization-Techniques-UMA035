@@ -1,0 +1,14 @@
+clc
+clear all
+k0=0;k1=100;
+A=[4 1 0 ;1 20 1;0 1 4];
+x=[1 ;1 ;1];
+tol=0.001;
+while abs(k1-k0)>tol
+    y=A*x;
+    k0=k1;
+    k1=max(abs(y));
+    x=(1/k1)*y;
+end
+k1
+x
