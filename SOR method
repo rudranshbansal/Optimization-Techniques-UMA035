@@ -1,0 +1,25 @@
+clc;
+clear;
+A=[10 8 -3 1;2 10 1 -4;3 -4 10 1;2 2 -3 10];
+B=[16;9;10;11];
+tol = 0.001;
+w = 1.2;
+n=length(B);
+error = 1;
+x = zeros(n,1);
+x0 = zeros(n,1);
+while error > tol
+    x0=x;
+    for i=1:n
+    sum =0;
+        for j=1:n
+            if(i~=j)
+            sum = sum + A(i,j)*x(j);
+            end
+        end
+    x(i) = (1-w)*x0(i) + (w*(B(i,:) - sum))/A(i,i);
+    end
+error = norm(x0-x,inf);
+end
+fprintf("The values of x1,x2,x3 and x4 are as follows:");
+x
