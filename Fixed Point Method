@@ -1,0 +1,22 @@
+clc
+clear all
+g = @(x) atan(4*x) + pi;
+x0 = 1.0;
+e=0.001;
+i=1;
+n=100;
+while(i<=n)
+    x1=g(x0);
+    if ((abs(x1 - x0))<=e)
+        fprintf('The root is: %f\n',x1);
+        flag=1;
+        break;
+    else
+        x0=x1;
+        i = i+1;
+    end
+end
+if flag==0
+    fprintf('Method Failed after %d iterations',i);
+end
+x1
