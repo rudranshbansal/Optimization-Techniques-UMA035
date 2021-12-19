@@ -1,0 +1,22 @@
+clc
+clear all
+A = input('Enter the matrix: ');
+B = input('Enter the vector: ');
+O = input('Enter the initial guess vector: ');
+n = input('Enter the number of iterations: ');
+tol = input('Enter tolerance: ');
+N = length(B);
+X = zeros(N,1);
+Y = zeros(N,1);
+for j =1:n
+    for i = 1:N
+        X(i) = (B(i) / A(i,i)) - (A(i,[1:i-1 , i+1:N])*O([i:i-1,i+1:N]))/A(i,i);
+        O(i) = X(i);
+    end
+    er=norm(Y-X,inf);
+    if(er<tol)
+        X
+        break;
+    end
+    Y=X;
+end
