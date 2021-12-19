@@ -1,0 +1,37 @@
+clc
+clear all
+%taking required inputs
+f=input('Enter the function: ');
+N=input('Enter the value of N: ');
+h=input('Enter the value of h: ');
+e=input('Enter the accepted tolerance: ');
+flag=0;
+%using ivt to find the initial values of x0 and x1
+% from 0 to N since time cannot be negative
+for i = 0:h:N
+    if f(i)*f(i+h)<0
+        a = i;
+        b = i+h;
+        break;
+    end
+end
+%applying secant method to find root
+x0 = a;
+x1 = b;
+for i=1:N
+    x2 = x1 - ((x1-x0)/(f(x1)-f(x0)))*f(x1);
+    if abs(x2-x1)<=e
+        fprintf('x = %f\n',x2)
+        flag=1;
+        break
+    else
+        x0 = x1;
+        x1 = x2;
+    end
+end
+
+%printing appropriate result on failure
+if flag==0
+    fprintf('Procedure is unsuccesful/n');
+    fprintf('Method failed after %d iterations\n',i);
+end
