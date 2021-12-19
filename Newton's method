@@ -1,0 +1,42 @@
+clc
+clear all
+%taking inputs
+f=input('Enter the function: ');
+N=input('Enter the value of N: ');
+h=input('Enter the value of h: ');
+e=input('Enter the accepted tolerance: ');
+flag=0;
+syms x
+dh=diff(f,x);
+j=inline(dh);
+%using ivt to find initial approximation
+% from 0 to N since time cannot be negative
+for i=0:h:N
+    if f(i)*f(i+h)<0
+        a=i;
+        b=i+h;
+        break;
+    end
+end
+%finding diff of func
+x0=(a+b)/2;
+i=0;
+%using newtons method and printing results
+if j(x0) ~= 0
+    while i<=N 
+        x1=x0-f(x0)/j(x0);
+        if abs(x1-x0)<=e
+            fprintf('The output is : %f\n',x1);
+            flag =1;
+            break;
+        else
+            i=i+1;
+            x0=x1;
+        end
+    end
+end
+%printing appropriate statement if method fails
+if flag==0
+    fprintf('Procedure is unsuccesful/n');
+    fprintf('Method failed after %d iterations\n',i);
+end
