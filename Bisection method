@@ -1,0 +1,29 @@
+clc
+clear all
+f=input('Enter the function: ');
+N=input('Enter the value of N: ');
+h=input('Enter the value of h: ');
+e=input('Enter the accepted tolerance: ');
+for i=-N:h:N
+    if f(i)*f(i+h)<0
+        a=i;
+        b=i+h;
+        break;
+    end
+end
+k=ceil((log(b-a)-log(e))/log(2));
+if(f(a)*f(b)<0)
+    while(abs(b-a)>e)
+        c=(a+b)/2;
+        if(f(c)==0)
+            break;
+        end
+        if(f(a)*f(c)<0)
+            b=c;
+        else
+            a=c;
+        end
+    end
+    fprintf('The most approximate root is %f\n',c);
+    fprintf('The number of iterations required is %d\n',k);
+end
