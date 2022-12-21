@@ -1,4 +1,4 @@
-# Matlab-codes
+# Optimization Techniques UMA035
 1.(a)Use intermediate value theorem to find the interval of the roots.
 \
   (b)Find the root of non-linear equation f(x) = 0 using bisection method.
